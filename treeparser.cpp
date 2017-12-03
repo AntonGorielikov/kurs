@@ -116,7 +116,8 @@ int TreeParser::vstf_search_for_sons(QTextStream *stream, TreeNode *parent_node)
         case FOUND_CLOSING_SONS_CHAR:
             return CONTINUE_SONS_SEARCH;
         case FILE_EOF:
-            return parent_node->get_value() == ROOT_VALUE ? FILE_EOF : UNEXPECTED_EOF;
+            return parent_node->get_value() == ROOT_VALUE ?
+                (int)FILE_EOF : (int)UNEXPECTED_EOF;
         default:
             return ret;
         }
@@ -127,7 +128,7 @@ int TreeParser::check_char_is_valid(QChar ch)
 {
     if (!allowed_chars_between_nodes.contains(ch))
         return 0;
-    else if (ch == ENDL)
+    else if (ch == '\n')
         current_line++;
 
     return 1;
@@ -138,7 +139,7 @@ const QString &TreeParser::get_error_message(int return_value)
     static QString err_msg;
 
     if (return_value > -1 && return_value < ERROR_COUNT - 1)
-        return QString("");
+        return err_msg = "";
 
     err_msg = error_messages[-return_value - 1];
 
@@ -157,9 +158,19 @@ void TreeParser::set_value_opening_char(QChar ch)
     value_opening_char = ch;
 }
 
+QChar TreeParser::get_value_opening_char()
+{
+    return value_opening_char;
+}
+
 void TreeParser::set_value_closing_char(QChar ch)
 {
     value_closing_char = ch;
+}
+
+QChar TreeParser::get_value_closing_char()
+{
+    return value_closing_char;
 }
 
 void TreeParser::set_sons_opening_char(QChar ch)
@@ -167,12 +178,17 @@ void TreeParser::set_sons_opening_char(QChar ch)
     sons_opening_char = ch;
 }
 
+QChar TreeParser::get_sons_opening_char()
+{
+    return sons_opening_char;
+}
+
 void TreeParser::set_sons_closing_char(QChar ch)
 {
     sons_closing_char = ch;
 }
 
-void TreeParser::set_allowed_chars_between_nodes_list(const QString &str)
+QChar TreeParser::get_sons_closing_char()
 {
-    allowed_chars_between_nodes = str;
+    return sons_closing_char;
 }

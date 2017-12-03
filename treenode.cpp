@@ -45,9 +45,35 @@ void TreeNode::set_parent(TreeNode *node)
     parent_ = node;
 }
 
+TreeNode *TreeNode::get_nson(int num) const
+{
+    TreeNode *son = son_;
+    for (int i = 0; son && i < num; son = son->get_next(), i++);
+    return son;
+}
+
+int TreeNode::get_nsons() const
+{
+    int nsons = 0;
+    for (TreeNode *son = son_; son; son = son->get_next(), nsons++);
+    return nsons;
+}
+
 QString TreeNode::get_value() const
 {
     return value_;
+}
+
+int TreeNode::get_index() const
+{
+    if (!parent_)
+        return -1;
+
+    int index = 0;
+    TreeNode *parent_son = parent_->get_son();
+    for (; parent_son != this; parent_son = parent_son->get_next());
+
+    return index;
 }
 
 void TreeNode::set_value(const QString &value)
@@ -60,13 +86,15 @@ void TreeNode::clear_sons()
     if (!son_)
         return;
 
-    TreeNode *prev_son = son_;
-    for (TreeNode *son = son_->get_next(); prev_son->get_next();
-         (prev_son = son ? : NULL), (son = son ? son->get_next() : NULL))
+    TreeNode *prev_son = son_,
+        *curr_son = prev_son->get_next();
+
+    for (; prev_son->get_next(); prev_son = curr_son, curr_son = curr_son->get_next())
     {
         delete prev_son;
     }
 
+    delete prev_son;
     son_ = NULL;
 }
 
@@ -92,18 +120,21 @@ void TreeNode::remove_son(TreeNode *node)
     if (!son || !node)
         return;
 
-    if (son != node)
-        for (; son->get_next() && son->get_next() != node; son = son->get_next());
+    if (node == son)
+    {
+        son_ = son->get_next();
+        return;
+    }
 
-    TreeNode *son_to_remove = son->get_next();
-    son->set_next(son->get_next()->get_next());
-    delete son_to_remove;
+    TreeNode *prev_son;
+    for (; son && son != node; prev_son = son, son = son->get_next());
+
+    prev_son->set_next(son->get_next());
 }
 
 void TreeNode::remove_son(int index)
 {
     TreeNode *son = son_;
     for (int i = 0; son && i < index; son = son->get_next(), i++);
-
     remove_son(son);
 }

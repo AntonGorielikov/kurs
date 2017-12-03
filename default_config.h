@@ -8,11 +8,14 @@
 #define DEFAULT_SONS_CLOSING_CHAR '}'
 #define DEFAULT_ALLOWED_CHAR_BETWEEN_NODES " \t\n"
 
-// misc defines
-#ifdef __unix__
-# define ENDL '\n'
-#else
-# define ENDL '\r\n'
-#endif
+// TreeModel config
+#define DEFAULT_HEADER_TEXT "Tree"
+
+// NodeValueInputDialog config
+#define DEFAULT_MAX_VALUE_LENGTH 127
+
+// OptionsDialog config
+#define MIN_MAX_VALUE_LENGTH_VALUE 8
+#define MAX_MAX_VALUE_LENGTH_VALUE 512
 
 #endif // DEFAULT_CONFIG_H

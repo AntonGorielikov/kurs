@@ -19,10 +19,13 @@ public:
     static const QString &get_error_message(int return_value);
 
     static void set_value_opening_char(QChar ch);
+    static QChar get_value_opening_char();
     static void set_value_closing_char(QChar ch);
+    static QChar get_value_closing_char();
     static void set_sons_opening_char(QChar ch);
+    static QChar get_sons_opening_char();
     static void set_sons_closing_char(QChar ch);
-    static void set_allowed_chars_between_nodes_list(const QString &str);
+    static QChar get_sons_closing_char();
 
 private:
     enum tree_parser_states {

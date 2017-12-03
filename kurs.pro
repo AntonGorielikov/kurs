@@ -28,11 +28,17 @@ SOURCES += \
         mainwindow.cpp \
     treeparser.cpp \
     treenode.cpp \
-    treefilewriter.cpp
+    treefilewriter.cpp \
+    treemodel.cpp \
+    nodevalueinputdialog.cpp \
+    optionsdialog.cpp
 
 HEADERS += \
         mainwindow.h \
     treeparser.h \
     treenode.h \
     treefilewriter.h \
-    default_config.h
+    default_config.h \
+    treemodel.h \
+    nodevalueinputdialog.h \
+    optionsdialog.h

@@ -15,7 +15,10 @@ public:
     void set_next(TreeNode *node);
     TreeNode *get_parent() const;
     void set_parent(TreeNode *node);
+    TreeNode *get_nson(int num) const;
+    int get_nsons() const;
     QString get_value() const;
+    int get_index() const;
     void set_value(const QString &value);
     void clear_sons();
     void add_son(TreeNode *node);
@@ -23,9 +26,9 @@ public:
     void remove_son(int index);
 
 private:
+    TreeNode *parent_;
     TreeNode *son_;
     TreeNode *next_;
-    TreeNode *parent_;
     QString value_;
 };
 
