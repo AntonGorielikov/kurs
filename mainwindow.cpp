@@ -83,7 +83,7 @@ void MainWindow::open()
     root_node_ = temp_root;
     file_path_ = file_name;
     setWindowTitle(file_path_);
-    emit tree_model_->layoutChanged();
+    tree_reset();
 }
 
 void MainWindow::save()

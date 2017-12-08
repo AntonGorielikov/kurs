@@ -129,7 +129,8 @@ void TreeNode::remove_son(TreeNode *node)
     TreeNode *prev_son;
     for (; son && son != node; prev_son = son, son = son->get_next());
 
-    prev_son->set_next(son->get_next());
+    if (son)
+        prev_son->set_next(son->get_next());
 }
 
 void TreeNode::remove_son(int index)
